@@ -10,6 +10,11 @@ st.write(
 
 from snowflake.snowpark.functions import col
 
+name_on_order = st.text_input("Name on the smoothie:")
+
+if name_on_order:
+    st.write("The name on the smoothie is", name_on_order)
+  
 cnx = st.connection("snowflake")
 session = cnx.session()
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'), col('SEARCH_ON'))
@@ -21,10 +26,7 @@ st.dataframe(pd_df)
 st.stop()
 
 
-name_on_order = st.text_input("Name on the smoothie:")
 
-if name_on_order:
-    st.write("The name on the smoothie is", name_on_order)
 
 ingredients_list = st.multiselect(
     "Choose upto 5 ingredients: ",
